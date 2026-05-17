@@ -27,15 +27,15 @@ describe("loadConfig", () => {
     expect(() => loadConfig(env as NodeJS.ProcessEnv)).toThrow(/Thiếu env.*DAUTHAU_APIKEY/);
   });
 
-  it("DAUTHAU_HASH_ALGO=md5 → cfg.hashAlgo='md5'", () => {
-    const cfg = loadConfig({ ...baseEnv, DAUTHAU_HASH_ALGO: "md5" } as NodeJS.ProcessEnv);
+  it("DAUTHAU_METHOD=md5_verify → cfg.hashAlgo='md5'", () => {
+    const cfg = loadConfig({ ...baseEnv, DAUTHAU_METHOD: "md5_verify" } as NodeJS.ProcessEnv);
     expect(cfg.hashAlgo).toBe("md5");
   });
 
-  it("DAUTHAU_HASH_ALGO không hợp lệ → throw", () => {
+  it("DAUTHAU_METHOD không hợp lệ → throw", () => {
     expect(() =>
-      loadConfig({ ...baseEnv, DAUTHAU_HASH_ALGO: "sha256" } as NodeJS.ProcessEnv),
-    ).toThrow(/DAUTHAU_HASH_ALGO/);
+      loadConfig({ ...baseEnv, DAUTHAU_METHOD: "sha256_verify" } as NodeJS.ProcessEnv),
+    ).toThrow(/DAUTHAU_METHOD/);
   });
 
   it("MCP_GATEWAY_URL không bắt đầu http(s) → throw", () => {

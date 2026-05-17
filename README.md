@@ -43,6 +43,7 @@ KHÔNG cần `npm install`. Dùng trực tiếp qua `npx`.
       "env": {
         "DAUTHAU_APIKEY":    "<apikey-cua-ban>",
         "DAUTHAU_APISECRET": "<apisecret-cua-ban>",
+        "DAUTHAU_METHOD": "md5_verify",
         "MCP_GATEWAY_URL":   "<url-gateway-duoc-cap>",
         "MCP_GATEWAY_KEY":   "<gateway-key-duoc-cap>"
       }
@@ -79,7 +80,7 @@ Sau khi config, restart MCP client (Claude Code / Cursor) để nạp wrapper. A
 
 | Env | Default | Mô tả |
 |---|---|---|
-| `DAUTHAU_HASH_ALGO` | `bcrypt` | Thuật toán ký: `bcrypt` (mặc định, khớp NukeViet `PASSWORD_DEFAULT`) hoặc `md5`. |
+| `DAUTHAU_METHOD` | `password_verify` | Phương thức xác thực chữ ký: `password_verify` (mặc định, dùng bcrypt) hoặc `md5_verify` (dùng md5). |
 | `LOG_LEVEL` | `info` | `debug` / `info` / `warn` / `error` — log ra **stderr** (stdout dành cho MCP framing). |
 | `MCP_GATEWAY_TIMEOUT_MS` | `30000` | Timeout HTTPS request lên gateway, range 1000-120000. |
 

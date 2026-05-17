@@ -47,10 +47,16 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     );
   }
 
-  const hashAlgoRaw = (env.DAUTHAU_HASH_ALGO ?? "bcrypt").toLowerCase();
-  if (hashAlgoRaw !== "md5" && hashAlgoRaw !== "bcrypt") {
+  const dauthauMethod = (env.DAUTHAU_METHOD ?? "password_verify").toLowerCase();
+  let hashAlgoRaw: "md5" | "bcrypt";
+  
+  if (dauthauMethod === "md5_verify") {
+    hashAlgoRaw = "md5";
+  } else if (dauthauMethod === "password_verify") {
+    hashAlgoRaw = "bcrypt";
+  } else {
     throw new Error(
-      `DAUTHAU_HASH_ALGO chỉ chấp nhận "md5" hoặc "bcrypt", got "${env.DAUTHAU_HASH_ALGO}"`,
+      `DAUTHAU_METHOD chỉ chấp nhận "md5_verify" hoặc "password_verify", got "${env.DAUTHAU_METHOD}"`,
     );
   }
 
@@ -87,7 +93,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     apisecret: env.DAUTHAU_APISECRET!.trim(),
     gatewayUrl,
     gatewayKey: env.MCP_GATEWAY_KEY!.trim(),
-    hashAlgo: hashAlgoRaw,
+    hashAlgo: hashAlgoRaw as HashAlgo,
     logLevel,
     timeoutMs,
     retryMax,

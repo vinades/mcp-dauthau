@@ -104,6 +104,7 @@ async function checkToolsList(cfg: Config): Promise<ToolsCheckResult> {
         "X-Dauthau-Apikey": cfg.apikey,
         "X-Dauthau-Hashsecret": hashsecret,
         "X-Dauthau-Timestamp": ts.toString(),
+        ...(cfg.hashAlgo === "bcrypt" ? { "X-Dauthau-Method": "password_verify" } : {}),
       },
       body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list", params: {} }),
       signal: controller.signal,

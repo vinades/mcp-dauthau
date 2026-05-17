@@ -102,7 +102,7 @@ function helpText(): string {
     "  MCP_GATEWAY_KEY    Gateway subscription key DauThau cấp",
     "",
     "Env tuỳ chọn:",
-    "  DAUTHAU_HASH_ALGO         bcrypt (default) | md5",
+    "  DAUTHAU_METHOD             password_verify (default) | md5_verify",
     "  LOG_LEVEL                  debug | info (default) | warn | error",
     "  MCP_GATEWAY_TIMEOUT_MS    1000-120000 (default 30000)",
     "  MCP_GATEWAY_RETRY_MAX     0-10 (default 3, retry khi 5xx)",
