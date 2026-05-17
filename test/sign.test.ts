@@ -67,15 +67,8 @@ describe("signHashsecret dispatch", () => {
     expect(out).toMatch(/^[0-9a-f]{32}$/);
   });
 
-  // Bcrypt cần native binding — skip nếu CI chưa cài.
-  it.skipIf(skipBcryptOnCI())("bcrypt algo → trả $2y$/$2b$ prefix", async () => {
+  it("bcrypt algo → trả $2a$/$2b$ prefix (bcryptjs pure JS)", async () => {
     const out = await signHashsecret("bcrypt", "secret", 1735000000);
-    expect(out).toMatch(/^\$2[ayb]\$/);
+    expect(out).toMatch(/^\$2[ab]\$/);
   });
 });
-
-function skipBcryptOnCI(): boolean {
-  // bcrypt là optionalDependency — môi trường CI Windows có thể không build được node-gyp.
-  // Skip khi env CI=true nếu test bcrypt fail.
-  return process.env.SKIP_BCRYPT_TESTS === "true";
-}

@@ -11,6 +11,8 @@
 
 import { createHash } from "node:crypto";
 
+import bcryptjs from "bcryptjs";
+
 import type { HashAlgo } from "./config.js";
 
 /** Trả unix timestamp (seconds). */
@@ -24,20 +26,13 @@ export function signMd5(apisecret: string, timestamp: number): string {
 }
 
 /**
- * Sign bcrypt hashsecret cho tài khoản có config `password_hash`.
- * Lazy import — chỉ require khi DAUTHAU_HASH_ALGO=bcrypt để giảm cold-start cho user md5.
+ * Sign bcrypt hashsecret cho tài khoản (mặc định NukeViet dùng PASSWORD_DEFAULT = bcrypt).
+ * bcryptjs là pure JS — không cần node-gyp / native binding.
  */
 export async function signBcrypt(apisecret: string, timestamp: number): Promise<string> {
-  let bcrypt: { hash(s: string, rounds: number): Promise<string> };
-  try {
-    bcrypt = (await import("bcrypt")) as unknown as typeof bcrypt;
-  } catch (err) {
-    throw new Error(
-      `DAUTHAU_HASH_ALGO=bcrypt nhưng module bcrypt chưa được cài. ` +
-        `Chạy: npm install bcrypt@^5.1.1. Lỗi: ${(err as Error).message}`,
-    );
-  }
-  return bcrypt.hash(`${apisecret}_${timestamp}`, 10);
+  const hash = await bcryptjs.hash(`${apisecret}_${timestamp}`, 10);
+  // PHP password_hash trả prefix $2y$, bcryptjs trả $2a$ — backend chấp nhận cả hai.
+  return hash;
 }
 
 /** Sign theo algo cấu hình. Mỗi request 1 timestamp + 1 hashsecret mới. */

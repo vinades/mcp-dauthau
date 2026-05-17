@@ -14,7 +14,7 @@ describe("loadConfig", () => {
     const cfg = loadConfig({ ...baseEnv } as NodeJS.ProcessEnv);
     expect(cfg.apikey).toBe("apikey_x");
     expect(cfg.gatewayUrl).toBe("https://gateway.example/");
-    expect(cfg.hashAlgo).toBe("md5");
+    expect(cfg.hashAlgo).toBe("bcrypt");
     expect(cfg.logLevel).toBe("info");
     expect(cfg.timeoutMs).toBe(30000);
     expect(cfg.retryMax).toBe(3);
@@ -27,9 +27,9 @@ describe("loadConfig", () => {
     expect(() => loadConfig(env as NodeJS.ProcessEnv)).toThrow(/Thiếu env.*DAUTHAU_APIKEY/);
   });
 
-  it("DAUTHAU_HASH_ALGO=bcrypt → cfg.hashAlgo='bcrypt'", () => {
-    const cfg = loadConfig({ ...baseEnv, DAUTHAU_HASH_ALGO: "bcrypt" } as NodeJS.ProcessEnv);
-    expect(cfg.hashAlgo).toBe("bcrypt");
+  it("DAUTHAU_HASH_ALGO=md5 → cfg.hashAlgo='md5'", () => {
+    const cfg = loadConfig({ ...baseEnv, DAUTHAU_HASH_ALGO: "md5" } as NodeJS.ProcessEnv);
+    expect(cfg.hashAlgo).toBe("md5");
   });
 
   it("DAUTHAU_HASH_ALGO không hợp lệ → throw", () => {

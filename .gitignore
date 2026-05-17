@@ -1,5 +1,6 @@
-.claude/settings.local.json
+.claude/
 docs/Plan.md
+CLAUDE.md
 
 node_modules/
 dist/

@@ -1,9 +1,12 @@
 /**
- * Ambient type declaration cho optional dependency `bcrypt`.
- * Chi tiết type đủ để sign.ts lazy-import mà không cần @types/bcrypt.
- * bcrypt là optionalDependency — lazy load chỉ khi DAUTHAU_HASH_ALGO=bcrypt.
+ * Ambient type declaration cho dependency `bcryptjs`.
+ * bcryptjs là pure JS — không cần native binding, hoạt động trên mọi platform.
  */
-declare module "bcrypt" {
+declare module "bcryptjs" {
   export function hash(data: string, saltOrRounds: number | string): Promise<string>;
   export function compare(data: string, encrypted: string): Promise<boolean>;
+  export function hashSync(data: string, saltOrRounds: number | string): string;
+  export function compareSync(data: string, encrypted: string): boolean;
+  export function genSaltSync(rounds?: number): string;
+  export function genSalt(rounds?: number): Promise<string>;
 }

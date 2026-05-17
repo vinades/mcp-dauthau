@@ -51,10 +51,6 @@ describe("forwardJsonRpc", () => {
       return new Response("{}", { status: 200, headers: { "content-type": "application/json" } });
     });
 
-    if (process.env.SKIP_BCRYPT_TESTS === "true") {
-      return; // bcrypt native build không có trong CI Windows
-    }
-
     await forwardJsonRpc(
       { jsonrpc: "2.0", id: 1, method: "tools/list", params: {} },
       { ...baseCfg, hashAlgo: "bcrypt" },

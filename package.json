@@ -29,19 +29,17 @@
     "anthropic"
   ],
   "author": "DauThau team",
-  "license": "MIT",
+  "license": "GPL-2.0-only",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinades/mcp-dauthau.git"
+    "url": "git@github.com:vinades/mcp-dauthau.git"
   },
   "engines": {
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "1.29.0"
-  },
-  "optionalDependencies": {
-    "bcrypt": "6.0.0"
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "bcryptjs": "3.0.3"
   },
   "devDependencies": {
     "@types/node": "20.11.0",

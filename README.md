@@ -79,7 +79,7 @@ Sau khi config, restart MCP client (Claude Code / Cursor) để nạp wrapper. A
 
 | Env | Default | Mô tả |
 |---|---|---|
-| `DAUTHAU_HASH_ALGO` | `md5` | Thuật toán ký: `md5` hoặc `bcrypt`. Đổi nếu tài khoản DauThau dùng `password_hash`. |
+| `DAUTHAU_HASH_ALGO` | `bcrypt` | Thuật toán ký: `bcrypt` (mặc định, khớp NukeViet `PASSWORD_DEFAULT`) hoặc `md5`. |
 | `LOG_LEVEL` | `info` | `debug` / `info` / `warn` / `error` — log ra **stderr** (stdout dành cho MCP framing). |
 | `MCP_GATEWAY_TIMEOUT_MS` | `30000` | Timeout HTTPS request lên gateway, range 1000-120000. |
 
@@ -108,16 +108,6 @@ Kiểm tra block `env` trong `.mcp.json` đã có đủ 4 biến bắt buộc. R
 ### `Node.js >= 22 required`
 
 Wrapper yêu cầu Node 22+ (LTS). Cài LTS mới nhất tại https://nodejs.org/.
-
-### `DAUTHAU_HASH_ALGO=bcrypt nhưng module bcrypt chưa được cài`
-
-`bcrypt` là optional dependency (cần native binding qua node-gyp). Cài thủ công:
-
-```bash
-npm install -g bcrypt@5.1.1
-```
-
-Hoặc bỏ `DAUTHAU_HASH_ALGO` để dùng `md5` mặc định.
 
 ### `gateway timeout sau 30000ms`
 

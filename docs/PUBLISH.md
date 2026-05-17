@@ -51,7 +51,7 @@ git push origin main --tags
 CI workflow `publish.yml` chạy:
 1. `npm ci`
 2. `npm run lint`
-3. `npm test` (Node 20 trên Ubuntu)
+3. `npm test` (Node 22 trên Ubuntu)
 4. `npm run build`
 5. `npm publish --access public --provenance` (provenance ký SLSA attestation cho supply chain)
 
@@ -73,7 +73,7 @@ npm deprecate @vinades/mcp-dauthau@0.1.X "lỗi nghiêm trọng, dùng 0.1.Y"
 
 ## Checklist phòng thủ supply chain
 
-- [x] `package.json` pin dependency cụ thể (`"@modelcontextprotocol/sdk": "1.6.0"`, KHÔNG `^`).
+- [x] `package.json` pin dependency cụ thể (`"@modelcontextprotocol/sdk": "1.29.0"`, KHÔNG `^`).
 - [x] `npm ci` thay `npm install` trong CI để dùng `package-lock.json` chính xác.
 - [x] `npm audit --audit-level=moderate` trong CI (`.github/workflows/test.yml`).
 - [x] `--provenance` flag khi publish — npm registry verify build artifact ký từ GitHub Actions thật.

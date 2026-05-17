@@ -4,7 +4,7 @@
  * Sau build: assets nằm ở `dist/assets/` (cùng thư mục với dist/index.js).
  * Dev mode (tsx src/index.ts): fallback `../dist/assets/` relative tới src/.
  *
- * Source of truth: ../dauthau-mcp-service/assets/ — KHÔNG sửa file local.
+ * Source of truth: ../mcp-dauthau/assets/ — KHÔNG sửa file local.
  */
 
 import { readFileSync, existsSync } from "node:fs";
@@ -21,14 +21,20 @@ function resolveAssetsDir(): string {
     return buildPath;
   }
 
-  // Dev mode (tsx src/index.ts): __dirname = src/, assets ở ../dist/assets/
+  // Dev mode (tsx src/index.ts): __dirname = src/, thử ../assets/ (committed)
+  const localPath = resolve(__dirname, "..", "assets");
+  if (existsSync(localPath)) {
+    return localPath;
+  }
+
+  // Fallback: ../dist/assets/
   const devPath = resolve(__dirname, "..", "dist", "assets");
   if (existsSync(devPath)) {
     return devPath;
   }
 
   throw new Error(
-    `Không tìm thấy thư mục assets/. Chạy "npm run build" trước, hoặc kiểm tra sibling repo dauthau-mcp-service.`,
+    `Không tìm thấy thư mục assets/. Chạy "npm run build" trước, hoặc kiểm tra sibling repo mcp-dauthau.`,
   );
 }
 

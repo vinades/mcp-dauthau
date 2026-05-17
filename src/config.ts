@@ -17,7 +17,7 @@ export interface Config {
   gatewayUrl: string;
   /** MCP API key do admin cấp — gửi qua header `X-MCP-API-Key`. */
   gatewayKey: string;
-  /** Thuật toán sign hashsecret. Default `md5`. `bcrypt` cho khách config password_hash. */
+  /** Thuật toán sign hashsecret. Default `bcrypt` (khớp NukeViet PASSWORD_DEFAULT). */
   hashAlgo: HashAlgo;
   /** Log level wrapper → stderr. Mặc định `info`. */
   logLevel: "debug" | "info" | "warn" | "error";
@@ -47,7 +47,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): Config {
     );
   }
 
-  const hashAlgoRaw = (env.DAUTHAU_HASH_ALGO ?? "md5").toLowerCase();
+  const hashAlgoRaw = (env.DAUTHAU_HASH_ALGO ?? "bcrypt").toLowerCase();
   if (hashAlgoRaw !== "md5" && hashAlgoRaw !== "bcrypt") {
     throw new Error(
       `DAUTHAU_HASH_ALGO chỉ chấp nhận "md5" hoặc "bcrypt", got "${env.DAUTHAU_HASH_ALGO}"`,
