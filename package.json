@@ -1,6 +1,6 @@
 {
   "name": "@dauthau/mcp-dauthau",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Node.js MCP wrapper kết nối AI tool (Claude Code, Cursor, ...) tới dịch vụ tra cứu đấu thầu DauThau. Apisecret giữ local, ký hashsecret mỗi request.",
   "type": "module",
   "bin": {
