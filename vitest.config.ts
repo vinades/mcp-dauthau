@@ -8,6 +8,12 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "html"],
       exclude: ["dist/", "test/", "vitest.config.ts", "**/*.d.ts"],
+      thresholds: {
+        lines: 80,
+        functions: 80,
+        branches: 80,
+        statements: 80,
+      },
     },
   },
 });

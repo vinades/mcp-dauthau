@@ -14,7 +14,7 @@ import { loadInstructions } from "./prompts.js";
 import { registerProxyHandlers } from "./tools.js";
 
 // package.json version — injected khi build (sau publish: process.env.npm_package_version).
-const VERSION = process.env.npm_package_version ?? "0.1.0";
+const VERSION = process.env.npm_package_version ?? "0.1.8";
 
 async function main(): Promise<void> {
   // Handle --version / --help trước khi load config (cho nhanh).
