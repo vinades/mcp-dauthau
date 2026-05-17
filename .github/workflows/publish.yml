@@ -13,8 +13,6 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-      - name: Clone sibling repo (shared assets)
-        run: git clone --depth=1 git@github.com:vinades/mcp-dauthau.git ../mcp-dauthau
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
