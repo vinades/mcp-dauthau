@@ -1,11 +1,11 @@
-# @dauthau/mcp
+# @vinades/mcp-dauthau
 
 Node.js wrapper kết nối AI tool (Claude Code, Cursor, Antigravity, Windsurf...) với dịch vụ tra cứu **đấu thầu công Việt Nam** của DauThau qua giao thức [Model Context Protocol](https://modelcontextprotocol.io/).
 
 Wrapper chạy stdio trên máy bạn, ký request local rồi forward HTTPS lên gateway. **Apisecret KHÔNG bao giờ rời máy bạn.**
 
-[![npm version](https://img.shields.io/npm/v/@dauthau/mcp.svg)](https://www.npmjs.com/package/@dauthau/mcp)
-[![Node.js Version](https://img.shields.io/node/v/@dauthau/mcp.svg)](https://nodejs.org/)
+[![npm version](https://img.shields.io/npm/v/@vinades/mcp-dauthau.svg)](https://www.npmjs.com/package/@vinades/mcp-dauthau)
+[![Node.js Version](https://img.shields.io/node/v/@vinades/mcp-dauthau.svg)](https://nodejs.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
@@ -13,7 +13,7 @@ Wrapper chạy stdio trên máy bạn, ký request local rồi forward HTTPS lê
 ## Tính năng
 
 - 🔐 **Apisecret giữ local** — wrapper ký `hashsecret` per-request bằng `node:crypto` (md5) hoặc `bcrypt`, chỉ gửi chữ ký qua mạng.
-- ⚡ **Zero-install** — chạy qua `npx -y @dauthau/mcp@latest`, không cài cố định, auto-update.
+- ⚡ **Zero-install** — chạy qua `npx -y @vinades/mcp-dauthau@latest`, không cài cố định, auto-update.
 - 🧩 **Pass-through proxy động** — danh sách tool query từ gateway mỗi session. Khi backend mở rộng tool, bạn KHÔNG cần update wrapper.
 - 🛡️ **Tối thiểu dependency** — chỉ 1 runtime dependency (`@modelcontextprotocol/sdk`) + Node stdlib. Mỗi release publish với npm [provenance](https://docs.npmjs.com/generating-provenance-statements) SLSA.
 - 🌍 **Cross-platform** — Node.js ≥ 22 trên macOS / Linux / Windows. CI test cả 3 OS × 3 Node version.
@@ -39,7 +39,7 @@ KHÔNG cần `npm install`. Dùng trực tiếp qua `npx`.
   "mcpServers": {
     "dauthau": {
       "command": "npx",
-      "args": ["-y", "@dauthau/mcp@latest"],
+      "args": ["-y", "@vinades/mcp-dauthau@latest"],
       "env": {
         "DAUTHAU_APIKEY":    "<apikey-cua-ban>",
         "DAUTHAU_APISECRET": "<apisecret-cua-ban>",
@@ -133,8 +133,8 @@ Mạng chậm hoặc gateway tạm thời không phản hồi. Tăng timeout qua
 ### Kiểm tra wrapper trước khi tin tưởng
 
 ```bash
-npx -y @dauthau/mcp@latest --version
-npx -y @dauthau/mcp@latest --help
+npx -y @vinades/mcp-dauthau@latest --version
+npx -y @vinades/mcp-dauthau@latest --help
 ```
 
 ---
@@ -153,7 +153,7 @@ node dist/index.js --version
 
 Roadmap chi tiết theo Phase: [docs/Plan.md](docs/Plan.md).
 Quy ước code và mental model: [CLAUDE.md](CLAUDE.md).
-Hướng dẫn publish npm: [PUBLISH.md](PUBLISH.md).
+Hướng dẫn publish npm: [PUBLISH.md](docs/PUBLISH.md).
 
 ### Đóng góp
 

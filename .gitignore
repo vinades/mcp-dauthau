@@ -1,0 +1,13 @@
+.claude/settings.local.json
+docs/Plan.md
+
+node_modules/
+dist/
+coverage/
+*.log
+.env
+.env.local
+.DS_Store
+.vscode/
+.idea/
+*.tsbuildinfo

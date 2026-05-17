@@ -1,0 +1,38 @@
+[
+  {
+    "name": "ascii_simple",
+    "apisecret": "test_secret_abc",
+    "timestamp": 1735000000,
+    "md5_expected": "7337cb0b1a25917bc72b4a27cfce8ee5"
+  },
+  {
+    "name": "unicode_vietnamese",
+    "apisecret": "bí_mật_tiếng_việt_có_dấu",
+    "timestamp": 1735000001,
+    "md5_expected": "1da7840bbf6d9d228a9eb2a7d5f6b708"
+  },
+  {
+    "name": "special_chars",
+    "apisecret": "!@#$%^&*()_+-=[]{}|;':\",./<>?",
+    "timestamp": 1735000002,
+    "md5_expected": "98fe6277c38019f1076da0c84dae17d4"
+  },
+  {
+    "name": "recent_timestamp",
+    "apisecret": "apisec_realistic",
+    "timestamp": 1742500000,
+    "md5_expected": "333aeca099b06c46ae43d8b01dbbaf6e"
+  },
+  {
+    "name": "long_apisecret",
+    "apisecret": "aA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kKaA0bB1cC2dD3eE4fF5gG6hH7iI8jJ9kK",
+    "timestamp": 1735000004,
+    "md5_expected": "d01daa51c56cc25862d1056d5377698f"
+  },
+  {
+    "name": "empty_apisecret",
+    "apisecret": "",
+    "timestamp": 1735000005,
+    "md5_expected": "7c03f25ad0c789756141c3e6bc6b6847"
+  }
+]

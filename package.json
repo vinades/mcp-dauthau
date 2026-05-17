@@ -1,0 +1,53 @@
+{
+  "name": "@vinades/mcp-dauthau",
+  "version": "0.1.0",
+  "description": "Node.js MCP wrapper kết nối AI tool (Claude Code, Cursor, ...) tới dịch vụ tra cứu đấu thầu DauThau. Apisecret giữ local, ký hashsecret mỗi request.",
+  "type": "module",
+  "bin": {
+    "mcpdauthau-wrapper": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "node scripts/copy-assets.mjs && tsc",
+    "dev": "tsx src/index.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run lint && npm run test && npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "dauthau",
+    "claude-code",
+    "anthropic"
+  ],
+  "author": "DauThau team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinades/mcp-dauthau.git"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0"
+  },
+  "optionalDependencies": {
+    "bcrypt": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.0",
+    "@vitest/coverage-v8": "4.1.6",
+    "tsx": "4.19.3",
+    "typescript": "5.3.3",
+    "vitest": "4.1.6"
+  }
+}
