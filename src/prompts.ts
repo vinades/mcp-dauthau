@@ -1,10 +1,8 @@
 /**
- * Load shared prompt assets (mcp-instructions.md + mcp-prompts-tools.json).
+ * Load prompt assets (mcp-instructions.md + mcp-prompts-tools.json).
  *
  * Sau build: assets nằm ở `dist/assets/` (cùng thư mục với dist/index.js).
- * Dev mode (tsx src/index.ts): fallback `../dist/assets/` relative tới src/.
- *
- * Source of truth: ../mcp-dauthau/assets/ — KHÔNG sửa file local.
+ * Dev mode (tsx src/index.ts): load trực tiếp từ `../assets/`.
  */
 
 import { readFileSync, existsSync } from "node:fs";
@@ -21,7 +19,7 @@ function resolveAssetsDir(): string {
     return buildPath;
   }
 
-  // Dev mode (tsx src/index.ts): __dirname = src/, thử ../assets/ (committed)
+  // Dev mode (tsx src/index.ts): __dirname = src/, lấy ../assets/ (đã commit sẵn)
   const localPath = resolve(__dirname, "..", "assets");
   if (existsSync(localPath)) {
     return localPath;
@@ -34,7 +32,7 @@ function resolveAssetsDir(): string {
   }
 
   throw new Error(
-    `Không tìm thấy thư mục assets/. Chạy "npm run build" trước, hoặc kiểm tra sibling repo mcp-dauthau.`,
+    `Không tìm thấy thư mục assets/. Hãy chắc chắn repo của bạn chứa thư mục assets/ hoặc đã chạy "npm run build".`,
   );
 }
 

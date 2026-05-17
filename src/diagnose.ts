@@ -12,7 +12,7 @@ import { signHashsecret, nowUnix } from "./sign.js";
 /** Chạy diagnose và in kết quả ra stdout. Return true nếu tất cả pass. */
 export async function runDiagnose(cfg: Config): Promise<boolean> {
   const write = (s: string) => process.stdout.write(s + "\n");
-  write(`@vinades/mcp-dauthau — chẩn đoán kết nối`);
+  write(`@dauthau/mcp-dauthau — chẩn đoán kết nối`);
   write(`Gateway: ${cfg.gatewayUrl}`);
   write(`Algo: ${cfg.hashAlgo} | Timeout: ${cfg.timeoutMs}ms | Retry: ${cfg.retryMax}`);
   write("---");
@@ -99,7 +99,7 @@ async function checkToolsList(cfg: Config): Promise<ToolsCheckResult> {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "User-Agent": `@vinades/mcp-dauthau diagnose Node/${process.versions.node}`,
+        "User-Agent": `@dauthau/mcp-dauthau diagnose Node/${process.versions.node}`,
         "X-MCP-API-Key": cfg.gatewayKey,
         "X-Dauthau-Apikey": cfg.apikey,
         "X-Dauthau-Hashsecret": hashsecret,

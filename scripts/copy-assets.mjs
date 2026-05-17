@@ -1,12 +1,8 @@
 /**
  * copy-assets.mjs — prebuild step: copy assets vào dist/assets/.
  *
- * Ưu tiên:
- *   1. Sibling repo ../mcp-dauthau/assets/ (source of truth, nếu có)
- *   2. Fallback: assets/ ở root repo này (đã commit vào git)
- *
- * Nếu có sibling repo → cập nhật cả assets/ (commit) lẫn dist/assets/ (build).
- * Nếu không có sibling repo → dùng assets/ đã commit sẵn → copy vào dist/assets/.
+ * Chỉ dùng assets/ đã commit sẵn trong repo → copy vào dist/assets/ 
+ * để đóng gói khi npm publish (do package.json chỉ include dist/).
  *
  * Chạy bởi `npm run build` trước tsc.
  */
@@ -18,12 +14,8 @@ import { fileURLToPath } from "node:url";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..");
 
-const SIBLING_REPO = resolve(ROOT, "..", "mcp-dauthau");
-const SIBLING_ASSETS = resolve(SIBLING_REPO, "assets");
-const SIBLING_TESTDATA = resolve(SIBLING_REPO, "testdata");
 const LOCAL_ASSETS = resolve(ROOT, "assets");
 const DIST_ASSETS = resolve(ROOT, "dist", "assets");
-const VECTORS_DEST = resolve(ROOT, "test", "vectors.json");
 
 /** File bắt buộc */
 const REQUIRED_ASSETS = [
@@ -31,36 +23,17 @@ const REQUIRED_ASSETS = [
   "mcp-prompts-tools.json",
 ];
 
-/** File tuỳ chọn: test vector chia sẻ */
-const OPTIONAL_VECTORS = "sign_vectors.json";
-
 function main() {
-  // Xác định nguồn assets
-  const hasSibling = existsSync(SIBLING_ASSETS);
-  const source = hasSibling ? SIBLING_ASSETS : LOCAL_ASSETS;
+  const source = LOCAL_ASSETS;
 
   if (!existsSync(source)) {
-    console.error(
-      `[copy-assets] LỖI: Không tìm thấy assets.\n` +
-      `  Cần ít nhất 1 trong 2:\n` +
-      `    - Sibling repo: cd .. && git clone git@github.com:vinades/mcp-dauthau.git\n` +
-      `    - Thư mục assets/ trong repo (đã commit)\n`,
-    );
+    console.error(`[copy-assets] LỖI: Không tìm thấy thư mục assets/ trong repo.\n`);
     process.exit(1);
-  }
-
-  if (hasSibling) {
-    console.error(`[copy-assets] Dùng sibling repo: ${SIBLING_ASSETS}`);
-  } else {
-    console.error(`[copy-assets] Sibling repo không có, dùng assets/ local`);
   }
 
   // Tạo thư mục đích
   if (!existsSync(DIST_ASSETS)) {
     mkdirSync(DIST_ASSETS, { recursive: true });
-  }
-  if (!existsSync(LOCAL_ASSETS)) {
-    mkdirSync(LOCAL_ASSETS, { recursive: true });
   }
 
   // Copy required assets
@@ -71,26 +44,9 @@ function main() {
       process.exit(1);
     }
 
-    // Luôn copy vào dist/assets/
+    // Copy vào dist/assets/
     copyFileSync(src, resolve(DIST_ASSETS, file));
-
-    // Nếu nguồn là sibling → cập nhật assets/ local (commit)
-    if (hasSibling) {
-      copyFileSync(src, resolve(LOCAL_ASSETS, file));
-    }
-
     console.error(`[copy-assets] ✓ ${file}`);
-  }
-
-  // Copy test vectors (tuỳ chọn)
-  if (hasSibling) {
-    const vectorsSrc = resolve(SIBLING_TESTDATA, OPTIONAL_VECTORS);
-    if (existsSync(vectorsSrc)) {
-      copyFileSync(vectorsSrc, VECTORS_DEST);
-      console.error(`[copy-assets] ✓ ${OPTIONAL_VECTORS} → test/vectors.json`);
-    } else {
-      console.error(`[copy-assets] ⚠ ${OPTIONAL_VECTORS} không tìm thấy (bỏ qua)`);
-    }
   }
 
   // Validate JSON

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Entrypoint @vinades/mcp-dauthau — chạy MCP server stdio local, forward HTTPS lên gateway.
+ * Entrypoint @dauthau/mcp-dauthau — chạy MCP server stdio local, forward HTTPS lên gateway.
  *
  * Xem README.md cho hướng dẫn cài đặt và mẫu config `.mcp.json`.
  */
@@ -20,7 +20,7 @@ async function main(): Promise<void> {
   // Handle --version / --help trước khi load config (cho nhanh).
   const arg = process.argv[2];
   if (arg === "--version" || arg === "-v") {
-    process.stdout.write(`@vinades/mcp-dauthau ${VERSION}\n`);
+    process.stdout.write(`@dauthau/mcp-dauthau ${VERSION}\n`);
     return;
   }
   if (arg === "--help" || arg === "-h") {
@@ -43,7 +43,7 @@ async function main(): Promise<void> {
     process.exit(ok ? 0 : 1);
   }
 
-  logInfo("@vinades/mcp-dauthau starting", {
+  logInfo("@dauthau/mcp-dauthau starting", {
     version: VERSION,
     gateway: cfg.gatewayUrl,
     hash_algo: cfg.hashAlgo,
@@ -88,12 +88,12 @@ async function main(): Promise<void> {
 
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  logInfo("@vinades/mcp-dauthau connected, waiting for client", {});
+  logInfo("@dauthau/mcp-dauthau connected, waiting for client", {});
 }
 
 function helpText(): string {
   return [
-    "@vinades/mcp-dauthau — Node.js MCP wrapper cho dịch vụ tra cứu đấu thầu DauThau",
+    "@dauthau/mcp-dauthau — Node.js MCP wrapper cho dịch vụ tra cứu đấu thầu DauThau",
     "",
     "Env bắt buộc:",
     "  DAUTHAU_APIKEY     Apikey từ tài khoản DauThau",

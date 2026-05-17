@@ -50,7 +50,7 @@ export async function forwardJsonRpc(
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
     Accept: "application/json, text/event-stream",
-    "User-Agent": `@vinades/mcp-dauthau Node/${process.versions.node}`,
+    "User-Agent": `@dauthau/mcp-dauthau Node/${process.versions.node}`,
     "X-MCP-API-Key": cfg.gatewayKey,
     "X-Dauthau-Apikey": cfg.apikey,
     "X-Dauthau-Hashsecret": hashsecret,
