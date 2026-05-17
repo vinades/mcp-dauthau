@@ -142,10 +142,6 @@ npm run build      # tsc → dist/
 node dist/index.js --version
 ```
 
-Roadmap chi tiết theo Phase: [docs/Plan.md](docs/Plan.md).
-Quy ước code và mental model: [CLAUDE.md](CLAUDE.md).
-Hướng dẫn publish npm: [PUBLISH.md](docs/PUBLISH.md).
-
 ### Đóng góp
 
 Pull request và issue đều welcome. Trước khi PR:
