@@ -178,4 +178,4 @@ Báo cáo lỗ hổng bảo mật: vui lòng dùng [GitHub Security Advisory](..
 
 ## License
 
-[MIT](LICENSE) © 2026 DauThau team
+GNU General Public License v2.0
